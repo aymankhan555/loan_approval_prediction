@@ -1,5 +1,5 @@
 #  Loan Approval Prediction System (Based on Default Risk)
-![Python](https://img.shields.io/badge/Python-3.10-blue?logo=python)
+![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red?logo=streamlit)
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-orange?logo=scikit-learn)
 ![XGBoost](https://img.shields.io/badge/XGBoost-Model-green)
@@ -7,7 +7,7 @@
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
 
-👉 **Live Demo:**  
+ **Live Demo:**  
 [![Streamlit App](https://img.shields.io/badge/Streamlit-Live%20App-red?logo=streamlit&logoColor=white)](https://aymankhan555-loan-approval-app.streamlit.app/)
 
 ---
@@ -31,7 +31,7 @@ Given borrower demographic and financial data, the goal is to:
 
 ---
 
-## 🧠 Project Logic
+##  Project Logic
 
 | Model Prediction | Meaning | Final Decision |
 |----------------|--------|---------------|
@@ -42,7 +42,7 @@ Given borrower demographic and financial data, the goal is to:
 
 ##  Dataset Information
 
-### 🎯 Target Variable
+### 🔹 Target Variable
 - **loan_status**: Indicates whether the borrower defaulted  
   - `1` = Default  
   - `0` = No Default  
@@ -68,7 +68,7 @@ Given borrower demographic and financial data, the goal is to:
 
 ---
 
-## 🧹 Data Preprocessing
+## 🔹 Data Preprocessing
 - Missing value handling  
 - Duplicate removal  
 - Range validation  
@@ -76,7 +76,7 @@ Given borrower demographic and financial data, the goal is to:
 
 ---
 
-## 📈 Exploratory Data Analysis
+## 🔹 Exploratory Data Analysis
 - Target distribution  
 - Feature distributions  
 - Default rates across categories  
@@ -84,15 +84,15 @@ Given borrower demographic and financial data, the goal is to:
 
 ---
 
-## ⚙️ Model Development
+## 🔹 Model Development
 - Feature engineering  
 - Models used:
-  - 🌲 Random Forest  
-  - 🚀 XGBoost  
+  -  Random Forest  
+  -  XGBoost  
 
 ---
 
-## 🔧 Hyperparameter Tuning
+## 🔹 Hyperparameter Tuning
 - Performed using **Optuna**  
 - Optimized XGBoost performance  
 
@@ -115,7 +115,7 @@ The **tuned XGBoost model** achieved the best performance among all models and w
 
 ---
 
-### 📈 Performance Metrics
+### 🔹 Performance Metrics
 
 - ✅ **Accuracy:** ~92%  
 - ✅ **ROC-AUC:** ~0.96  
@@ -150,14 +150,14 @@ Key influencing factors:
 ## 🌐 Streamlit Web Application
 
 An interactive web app built with Streamlit:
-
+[![Streamlit App](https://img.shields.io/badge/Streamlit-Live%20App-red?logo=streamlit&logoColor=white)](https://aymankhan555-loan-approval-app.streamlit.app/)
 - Input applicant details  
 - Get instant loan approval prediction  
 - View approval probability  
 
 ---
 
-## 🖼️ App Preview
+##  App Preview
 
 
 
@@ -187,10 +187,13 @@ If you found this project interesting or useful:
 
 ---
 
-## 🚀 Future Improvements
 
-- Experiment with additional machine learning models (e.g., LightGBM, CatBoost, Neural Networks) to further improve prediction performance   
--  Integrate deep learning approaches for more complex pattern recognition  
--  Enhance the Streamlit UI with advanced components and better user experience  
--  Integrate an AI agent to automatically send loan decision notifications via email  
--  Implement model monitoring and performance tracking for real-world deployment  
+
+##  Future Improvements
+
+- **Explore additional ML models:** LightGBM, CatBoost, and Neural Networks to improve prediction performance  
+- **Advanced hyperparameter tuning:** Optimize models for better accuracy and generalization  
+- **Deep learning integration:** Capture complex patterns in borrower data  
+- **Enhanced UI/UX:** Improve Streamlit interface with advanced components for better user experience   
+- **Automated notifications:** Integrate AI agent to send decision updates via email  
+- **Model monitoring:** Track model performance in production for reliability and risk management    
