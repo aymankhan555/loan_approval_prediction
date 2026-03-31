@@ -83,6 +83,16 @@ Given borrower demographic and financial data, the goal is to:
 - Correlation analysis  
 
 ---
+## 🔹 Feature Engineering
+| Feature Name              | Description / Formula                                                                                                        |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **income_to_loan**        | Ratio of annual income to loan amount: `person_income / (loan_amnt + 1)`                                                     |
+| **age_to_emp_length**     | Ratio of borrower's age to employment length: `person_age / (person_emp_length + 1)`                                         |
+| **log_income**            | Log-transformed income to reduce skew: `log1p(person_income)`                                                                |
+| **age_to_credit_history** | Ratio of age to credit history length: `person_age / cb_person_cred_hist_length`                                             |
+| **stability_score**       | Borrower's financial stability score: `(person_emp_length * person_income) / (loan_amnt * (cb_person_cred_hist_length + 1))` |
+| **rate_to_age**           | Ratio of loan interest rate to age: `loan_int_rate / person_age`                                                             |
+
 
 ## 🔹 Model Development
 - Feature engineering  
@@ -124,7 +134,7 @@ The **tuned XGBoost model** achieved the best performance among all models and w
 
 ---
 
-###  Model Insights
+### 🔹Model Insights
 
 The tuned XGBoost model performs effectively in identifying risky borrowers:
 
@@ -137,19 +147,16 @@ The tuned XGBoost model performs effectively in identifying risky borrowers:
 
 
 
-##  Feature Importance
-Key influencing factors:
-- Loan-to-income ratio  
-- Interest rate  
-- Credit history length  
-- Income level  
-- Previous default history  
+### 🔹 Feature Importance
+![Feature Importance](pics/feature_importances.png)
+  
 
 ---
 
-## 🌐 Streamlit Web Application
+##  Streamlit Web Application
 
 An interactive web app built with Streamlit:
+
 [![Streamlit App](https://img.shields.io/badge/Streamlit-Live%20App-red?logo=streamlit&logoColor=white)](https://aymankhan555-loan-approval-app.streamlit.app/)
 - Input applicant details  
 - Get instant loan approval prediction  
@@ -161,19 +168,20 @@ An interactive web app built with Streamlit:
 
 
 
-![App Screenshot](app_screenshot.png)
+![App Screenshot](pics/streamlit1.png)
+![App Screenshot](pics/streamlit2.png)
+![App Screenshot](pics/streamlit3.png)
 
 ---
 
-## 🚀 How to Run Locally
+##  How to Run Locally
 
 ```bash
 pip install -r requirements.txt
 streamlit run loan_approval_app.py
 ```
 
-##  Conclusion
-...conclusion...
+
 
 ---
 
