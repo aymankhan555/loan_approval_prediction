@@ -168,9 +168,9 @@ An interactive web app built with Streamlit:
 
 
 
-![App Screenshot](main/pics/streamlit1.png)
-![App Screenshot](main/pics/streamlit2.png)
-![App Screenshot](main/pics/streamlit3.png)
+![App Screenshot](pics/streamlit1.png)
+![App Screenshot](pics/streamlit2.png)
+![App Screenshot](pics/streamlit3.png)
 
 ---
 
