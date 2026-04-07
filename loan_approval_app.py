@@ -86,8 +86,8 @@ def new_features(data_df):
 
 def model_load():
     try:
-        model = joblib.load("best_model.pkl")
-        model_columns = joblib.load("feature_columns.pkl")
+        model = joblib.load("../models/best_model.pkl")
+        model_columns = joblib.load("../models/feature_columns.pkl")
         st.sidebar.success("Model and feature columns loaded successfully!")
         return model, model_columns
     except Exception as e:
