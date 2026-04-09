@@ -84,9 +84,11 @@ Four notebooks with a clean, linear run order — no revisiting, no loops:
 
 **91,226 loan records** with borrower demographic, financial, and loan-specific features.
 
+
 ### Target Variable
-- **loan_status** — `1` = Default, `0` = No Default
-- Class distribution: **83% No Default / 17% Default** — imbalanced, handled via `scale_pos_weight`
+- **loan_status** where `1` = Default and `0` = No Default
+- Class distribution: **83% No Default / 17% Default**, imbalanced dataset
+  handled using `scale_pos_weight` to give the minority class more weight
 
 ![Class Distribution](pics/class_distribution.png)
 
@@ -111,9 +113,8 @@ Four notebooks with a clean, linear run order — no revisiting, no loops:
 ## 🔧 Data Preprocessing
 
 ### Missing Values
-Median imputation was used for two columns — median chosen over mean to avoid being pulled by outliers:
-- `loan_int_rate` — 3,116 missing values
-- `person_emp_length` — 895 missing values
+- `loan_int_rate` had 3,116 missing values, filled using median imputation
+- `person_emp_length` had 895 missing values, filled using median imputation
 
 ### Duplicates
 165 duplicate rows found and removed (checked excluding the `id` column to avoid false negatives).
@@ -123,9 +124,9 @@ A custom range check flagged impossible values:
 
 | Column | Issue Found | Action |
 |---|---|---|
-| person_age | Ages 123, 144, 94, 84 | Removed — impossible or outside borrowing demographic |
-| person_emp_length | Employment length 123 years | Removed — clearly a data entry error |
-| person_income | Values up to $6M | Retained — controlled via `log_income` transformation |
+| person_age | Ages 123, 144, 94, 84 | Removed as they are impossible or outside the typical borrowing demographic |
+| person_emp_length | Employment length of 123 years | Removed as this is clearly a data entry error |
+| person_income | Values up to $6M | Kept because they could be genuine. Handled later via `log_income` transformation |
 
 Only **14 rows removed** out of 91,060 — less than 0.02% of the data.
 
@@ -205,8 +206,8 @@ Tree-based models (Random Forest, XGBoost) make decisions based on split thresho
 | Model | Scaled | Reason |
 |---|---|---|
 | Logistic Regression | ✅ via Pipeline | Sensitive to feature magnitude |
-| Random Forest | ❌ | Tree-based — scale invariant |
-| XGBoost | ❌ | Tree-based — scale invariant |
+| Random Forest | ❌ | Tree-based, splits on thresholds not distances so scaling has no effect |
+| XGBoost | ❌ | Same reason as Random Forest |
 
 A `Pipeline(StandardScaler → LogisticRegression)` was used to ensure scaling only fits on training folds during cross-validation — preventing data leakage.
 
@@ -238,10 +239,11 @@ Tuning performed in a dedicated notebook using **Optuna with TPE Sampler** over 
 
 Fixed parameters (`scale_pos_weight`, `random_state`, `eval_metric`) were kept outside the search space so `study.best_params` only contains tunable parameters — avoiding duplication when building the final model.
 
+**AUC improvement across 150 trials:**
 ![Optuna Optimization History](pics/optuna_optimization_history.png)
 
+**Which hyperparameters had the most impact:**
 ![Optuna Parameter Importances](pics/optuna_param_importances.png)
-
 ### Best Parameters
 
 | Parameter | Search Range | Best Value |
@@ -269,8 +271,10 @@ Fixed parameters (`scale_pos_weight`, `random_state`, `eval_metric`) were kept o
 | Precision (Default) | **75%** |
 | F1 (Default) | **0.79** |
 
+**Confusion Matrix — how many defaults the model caught vs missed:**
 ![Confusion Matrix](pics/confusion_matrix.png)
 
+**ROC Curve :**
 ![ROC Curve](pics/roc_curve.png)
 
 ### What the Numbers Mean
