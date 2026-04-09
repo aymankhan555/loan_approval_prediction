@@ -135,19 +135,35 @@ Only **14 rows removed** out of 91,060 — less than 0.02% of the data.
 
 ## 🔬 Exploratory Data Analysis
 
-![Feature Distributions](pics/feature_distributions.png)
 
 ![Categorical Default Rates](pics/categorical_default_rates.png)
 
-**Key findings:**
+**What the categories tell us:**
 
-- `loan_percent_income` has the strongest correlation with default (**+0.38**) — higher loan burden means higher risk
-- `loan_int_rate` is also a strong predictor (**+0.33**) — riskier borrowers get higher rates
-- **Loan Grade** is the clearest separator — Grade A/B borrowers rarely default; Grade D–G are high risk
-- Borrowers with a prior default on file show significantly higher default rates — a critical flag
-- `person_age` and `cb_person_cred_hist_length` are highly correlated (**+0.88**) — addressed through engineered features
+| Category | Low Risk ✅ | Moderate ⚠️ | High Risk 🚨 |
+|---|---|---|---|
+| 🏠 Home Ownership | OWN | MORTGAGE | RENT |
+| 🎯 Loan Purpose | Education / Venture | Home Improvement | Medical / Debt Consolidation |
+| 📉 Loan Grade | A & B (Prime) | C (Mid-tier) | D, E, F, G (Subprime) |
+| 🚩 Default History | No (N) | — | Yes (Y) — Critical Flag |
+
+Borrowers with higher loan burden, higher interest rates, lower credit
+grades, and a previous default are much more likely to default. On the
+other hand, people with stable income, longer credit history, and home
+ownership tend to be safer bets.
 
 ![Correlation Heatmap](pics/correlation_heatmap.png)
+**What the numbers tell us:**
+
+| Feature | Correlation | What it means |
+|---|---|---|
+| loan_percent_income → loan_status | +0.38 | Higher loan burden increases default risk |
+| loan_int_rate → loan_status | +0.33 | Higher interest rates lead to more defaults |
+| person_income → loan_status | -0.17 | Higher income slightly reduces default risk |
+| person_age, emp_length, cred_hist → loan_status | ~0 | Weak individual impact |
+| person_age ↔ cred_hist_length | +0.88 | Strongly correlated — addressed via feature engineering |
+
+
 
 ---
 
@@ -365,6 +381,6 @@ streamlit run loan_approval_app.py
 
 If you found this project useful:
 
-⭐ Star the repo
-🍴 Fork it
-💬 Open an issue or give feedback
+- ⭐ Star the repo
+- 🍴 Fork it
+- 💬 Open an issue or give feedback
